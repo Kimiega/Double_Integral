@@ -7,7 +7,11 @@ import utils.IntegralSolver;
 public class Main {
 
     public static void main(String[] args) {
-        args = new String[]{"1000", "0", "8", "8", "0", "0", "-8", "-8", "0"};
+        //args = new String[]{"1000", "0", "8", "8", "0", "0", "-8", "-8", "0"};
+        Double leftXBeam = -12D;
+        Double rightXBeam = 8D;
+        Double bottomYBeam = -12D;
+        Double topYBeam = 32D;
         if (args.length < 7 || args.length % 2 == 0) {
             System.err.println("ERROR");
             System.err.println("FIRST NUMBER IS FINENESS");
@@ -21,7 +25,12 @@ public class Main {
         for (int i = 0, j = 1; i < args.length / 2 && j < args.length; i++, j+=2) {
             dots[i] = new Dot(Double.parseDouble(args[j]), Double.parseDouble(args[j + 1]));
     }
-        IntegralSolver integralSolver = new IntegralSolver(fineness, new Polygon(dots));
+        IntegralSolver integralSolver = new IntegralSolver(
+                fineness,
+                new Polygon(dots),
+                new Dot(leftXBeam, bottomYBeam),
+                new Dot(rightXBeam, topYBeam)
+        );
         integralSolver.integrate();
     }
 }
